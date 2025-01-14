@@ -69,6 +69,17 @@ function App() {
               <FaArrowUp className="active:text-black" />
               Upgrade
             </button>
+
+            <button
+              onClick={handleConnectWallet}
+              className="mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center gap-2 transition-all duration-200 transform hover:scale-105"
+            >
+              <FaWallet className="text-xl" />
+              {walletAddress 
+                ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                : 'Conectar Wallet'
+              }
+            </button>
           </div>
         </div>
 
@@ -92,17 +103,6 @@ function App() {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={handleConnectWallet}
-          className="mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg w-full flex items-center justify-center gap-2 transition-all duration-200 transform hover:scale-105"
-        >
-          <FaWallet className="text-xl" />
-          {walletAddress 
-            ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-            : 'Conectar Wallet'
-          }
-        </button>
 
         <p className="mt-4 text-sm text-gray-400">{message}</p>
       </div>
