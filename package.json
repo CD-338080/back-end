@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "moralis": "2.22.4",
-    "@moralisweb3/common-evm-utils": "2.22.4"
+    "@moralisweb3/common-evm-utils": "2.22.4",
+    "@moralisweb3/core": "2.22.4"
   },
   "scripts": {
     "start": "react-app-rewired start",
