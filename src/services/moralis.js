@@ -1,15 +1,17 @@
-let Moralis = null;
+let MoralisInstance = null;
 
 const initMoralis = async () => {
   try {
-    if (!Moralis) {
-      const moralisModule = await import('moralis');
-      Moralis = moralisModule.default;
+    if (!MoralisInstance) {
+      const { default: Moralis } = await import('moralis');
+      MoralisInstance = Moralis;
     }
-    await Moralis.start({
-      apiKey: process.env.REACT_APP_MORALIS_API_KEY
+    
+    await MoralisInstance.start({
+      apiKey: process.env.REACT_APP_MORALIS_API_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImUxMzY1MzFkLWY5NmQtNDA4Yy1hNzdlLWM4YmQ1MjlhY2Y3ZiIsIm9yZ0lkIjoiNDI1NDM1IiwidXNlcklkIjoiNDM3NTYzIiwidHlwZUlkIjoiZjYxN2E2ZjAtZTM1NC00YWMwLWI3NzgtMGZkZWIxMjlmMjZkIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MzY3Mjk0MTEsImV4cCI6NDg5MjQ4OTQxMX0.oEJcUazrWgOIb40-u0B4Dk3jJ0nr-MuVeWM0gt__HMU'
     });
-    return Moralis;
+    
+    return MoralisInstance;
   } catch (error) {
     console.error('Failed to initialize Moralis:', error);
     throw error;
@@ -18,8 +20,9 @@ const initMoralis = async () => {
 
 export const connectWallet = async () => {
   try {
-    await initMoralis();
+    const moralis = await initMoralis();
     const { ethereum } = window;
+    
     if (!ethereum) {
       throw new Error('Please install MetaMask!');
     }
